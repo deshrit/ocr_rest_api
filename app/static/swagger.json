@@ -1,0 +1,185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This server returns OCR of image documents.\nIt supports 3 different languages English, French and Spanish.\nEach language is a different endpoint.",
+    "version": "1.0.0",
+    "title": "OCR REST API",
+    "contact": { "email": "deshritbaral@gmail.com" },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/mit/"
+    }
+  },
+  "basePath": "/api/v1",
+  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "info",
+      "description": "Information about request formats and size"
+    },
+    {
+      "name": "ocr",
+      "description": "OCR endpoints"
+    }
+  ],
+  "paths": {
+    "/healthz": {
+      "get": {
+        "tags": ["info"],
+        "summary": "Check server status",
+        "description": "Returns status wheather the server is runing or not",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "sucessful operation",
+            "schema": { "$ref": "#/definitions/Healthz" }
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "tags": ["info"],
+        "summary": "Things to know before making a request",
+        "description": "Returns the language supported, image file types supported and maximum size of image file.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "sucessful operation",
+            "schema": { "$ref": "#/definitions/Info" }
+          }
+        }
+      }
+    },
+    "/ocr": {
+      "post": {
+        "tags": ["ocr"],
+        "summary": "Default OCR endpoint - English language",
+        "description": "Returns the OCR response of payload image",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": { "$ref": "#/definitions/OCR" }
+          },
+          "400": {
+            "description": "invalid file type"
+          }
+        }
+      }
+    },
+    "/ocr/eng": {
+      "post": {
+        "tags": ["ocr"],
+        "summary": "same as '/ocr'"
+      }
+    },
+    "/ocr/fra": {
+      "post": {
+        "tags": ["ocr"],
+        "summary": "OCR endpoint - French language",
+        "description": "Returns the OCR response of payload image",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": { "$ref": "#/definitions/OCR" }
+          },
+          "400": {
+            "description": "invalid file type"
+          }
+        }
+      }
+    },
+    "/ocr/spa": {
+      "post": {
+        "tags": ["ocr"],
+        "summary": "OCR endpoint - Spanish language",
+        "description": "Returns the OCR response of payload image",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": { "$ref": "#/definitions/OCR" }
+          },
+          "400": {
+            "description": "invalid file type"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Healthz": {
+      "type": "object",
+      "properties": {
+        "message": { "type": "string" }
+      }
+    },
+    "Info": {
+      "type": "object",
+      "properties": {
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_file_size": { "type": "integer" },
+        "supported_formats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OCR": {
+      "type": "object",
+      "properties": {
+        "block_num": { "type": "array", "items": { "type": "integer" } },
+        "conf": { "type": "array", "items": { "type": "integer" } },
+        "height": { "type": "array", "items": { "type": "integer" } },
+        "left": { "type": "array", "items": { "type": "integer" } },
+        "level": { "type": "array", "items": { "type": "integer" } },
+        "line_num": { "type": "array", "items": { "type": "integer" } },
+        "page_num": { "type": "array", "items": { "type": "integer" } },
+        "par_num": { "type": "array", "items": { "type": "integer" } },
+        "text": { "type": "array", "items": { "type": "string" } },
+        "top": { "type": "array", "items": { "type": "integer" } },
+        "width": { "type": "array", "items": { "type": "integer" } },
+        "word_num": { "type": "array", "items": { "type": "integer" } }
+      }
+    }
+  }
+}

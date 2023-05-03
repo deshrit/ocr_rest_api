@@ -11,7 +11,7 @@
     }
   },
   "basePath": "/api/v1",
-  "schemes": ["http"],
+  "schemes": ["http", "https"],
   "tags": [
     {
       "name": "info",

@@ -51,7 +51,7 @@
         }
       }
     },
-    "/ocr": {
+    "/ocr/eng": {
       "post": {
         "tags": ["ocr"],
         "summary": "Default OCR endpoint - English language",
@@ -76,12 +76,6 @@
             "description": "invalid file type"
           }
         }
-      }
-    },
-    "/ocr/eng": {
-      "post": {
-        "tags": ["ocr"],
-        "summary": "same as '/ocr'"
       }
     },
     "/ocr/fra": {

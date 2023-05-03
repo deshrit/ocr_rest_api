@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify
-from flask_cors import CORS
+# from flask_cors import CORS
 from . import utils
 
 bp = Blueprint("info", __name__, url_prefix="/api/v1")
-CORS(bp)
+# CORS(bp)
 
 @bp.route("/", methods=["GET"])
 @bp.route("/healthz", methods=["GET"])

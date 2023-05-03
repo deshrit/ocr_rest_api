@@ -14,9 +14,7 @@ jobs:
       run: docker build -t $DOCKERHUB_IMAGE_NAME .
     
     - name: Login to dockerhub
-      run: >
-      echo "${{ secrets.DOCKERHUB_PASSWORD }}" | 
-      docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     
     - name: Push the image
       run: docker push ${{ vars.DOCKERHUB_IMAGE_NAME }}

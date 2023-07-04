@@ -32,6 +32,6 @@ if [ $INPUT == 'deploy' ]; then
     CONTAINER_NAME=ocr_rest_api
 
     docker build -t $IMG_NAME . && \
-    docker run -itd -p $DEPLOY_PORT:$DEPLOY_PORT --name $CONTAINER_NAME $IMG_NAME
+    docker run --rm -itd -p $DEPLOY_PORT:$DEPLOY_PORT --name $CONTAINER_NAME $IMG_NAME
     exit
 fi

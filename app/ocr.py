@@ -15,7 +15,6 @@ def ocr():
             return jsonify(res)
         return jsonify({"error": "Only image files are allowed"}), 400
     except Exception as e:
-        print(e)
         pass
 
     return {}
@@ -32,7 +31,7 @@ def ocr_fra():
             res = utils.get_ocr_data(file, lang=utils.Languages.FRENCH)
             return jsonify(res)
         return jsonify({"error": "Only image files are allowed"}), 400
-    except:
+    except Exception as e:
         pass
 
     return {}
@@ -49,7 +48,7 @@ def ocr_spa():
             res = utils.get_ocr_data(file, lang=utils.Languages.SPANISH)
             return jsonify(res)
         return jsonify({"error": "Only image files are allowed"}), 400
-    except:
+    except Exception as e:
         pass
 
     return {}

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 INPUT=$1
 
 if [ -z $INPUT ]; then
@@ -15,7 +17,7 @@ if [ $INPUT == 'dev' ]; then
     CONTAINER_NAME=dev_ocr
 
     docker build -t $IMG_NAME -f Dockerfile.dev . && \
-    docker run -itd -p $DEV_PORT:$DEV_PORT -v `pwd`:$WORK_DIR --name $CONTAINER_NAME $IMG_NAME
+    docker run -it -p $DEV_PORT:$DEV_PORT -v `pwd`:$WORK_DIR --name $CONTAINER_NAME $IMG_NAME
     docker exec -it $CONTAINER_NAME /bin/bash
     exit
 fi
